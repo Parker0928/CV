@@ -2,7 +2,7 @@
 <p align="center"><strong>Senior Frontend Engineer</strong></p>
 <p align="center">
   📞 15807488252 &nbsp;·&nbsp;
-  ✉️ <a href="mailto:zhipeng9281415@gmail.com">zhipeng9281415@gmail.com</a> &nbsp;·&nbsp;
+  ✉️ <a href="mailto:Parker928@proton.me">Parker928@proton.me</a> &nbsp;·&nbsp;
   💬 yzp394029607 &nbsp;·&nbsp;
   📍 深圳
 </p>
@@ -160,7 +160,6 @@
 ## 🎓 教育背景
 
 - 🏫 **长沙理工大学**（学历网可查）— 计算机应用 · 本科
-- 🏆 **校内奖项：** 软件蓝桥杯二等奖 
 ---
 
 <p align="center"><sub>✨ 感谢您的阅读，期待与您的合作 ✨</sub></p>
