@@ -292,6 +292,118 @@ function useSSE(url: string) {
 
 ---
 
+## 十一、CSS3 & HTML5 基础（常被忽视的考点）
+
+**Q51**【中等】BFC（Block Formatting Context）是什么？触发条件有哪些？在实际开发中什么场景会用到？  
+**考察：** CSS 布局原理  
+**要点：** BFC 是独立渲染区域，内部元素不影响外部；触发：`overflow: hidden`、`display: flex/grid`、`float`、`position: absolute/fixed`；场景：清除浮动、防止 margin 塌陷、自适应两栏布局。
+
+**Q52**【中等】Flex 布局中 `flex: 1` 等价于什么？`flex-grow`、`flex-shrink`、`flex-basis` 三者分别控制什么？  
+**考察：** Flex 布局  
+**要点：** `flex: 1` = `flex-grow: 1; flex-shrink: 1; flex-basis: 0%`；grow 控制剩余空间分配比例、shrink 控制空间不足时的收缩比例、basis 控制初始主轴尺寸。
+
+**Q53**【中等】CSS 选择器优先级如何计算？`!important` > 内联 > ID > Class > 标签，如果两个选择器权重相同怎么办？  
+**考察：** 选择器权重  
+**要点：** 相同权重按源码顺序后者覆盖前者；权重计算：(内联, ID 数, 类/属性/伪类数, 标签/伪元素数)；`!important` 破坏层叠规则，应尽量避免。
+
+**Q54**【进阶】`position: sticky` 的工作原理和使用限制？在你的交易所项目中，表头固定是怎么实现的？  
+**考察：** 定位机制  
+**要点：** sticky 在滚动到阈值前是 relative，到达后变为 fixed；限制：祖先元素不能有 `overflow: hidden/auto`，必须指定 `top/left` 等阈值；交易所场景也可以用双层 div（固定表头 + 可滚动 body）实现。
+
+**Q55**【中等】HTML5 的 `Web Workers`、`Service Worker`、`SharedWorker` 三者有什么区别？你在分片上传中为什么选 Web Workers？  
+**考察：** HTML5 多线程  
+**要点：** Web Worker 专属单页面后台线程；SharedWorker 多页面共享；Service Worker 拦截网络请求（PWA/离线缓存）；分片上传选 Web Worker 因为只需要单页面内做 CPU 密集的 Hash 计算，不需要跨页面通信。
+
+---
+
+## 十二、Vite & Webpack 构建工具
+
+**Q56**【中等】Vite 为什么比 Webpack 快？它的开发模式和生产模式分别用了什么技术？  
+**考察：** 构建工具原理  
+**要点：** 开发模式：基于浏览器原生 ESM + esbuild 预构建依赖（Go 编写，速度极快）；生产模式：用 Rollup 打包；Webpack 开发时需要全量打包后启动 DevServer，所以慢。
+
+**Q57**【中等】Vite 的 HMR（热更新）为什么快？和 Webpack 的 HMR 有什么区别？  
+**考察：** HMR 机制  
+**要点：** Vite HMR 基于 ESM，只需要重新请求变更的模块（精确到文件级），不需要重新构建整个 Bundle；Webpack HMR 需要重新编译变更模块及其依赖链，项目越大越慢。
+
+**Q58**【进阶】你在项目中用 `vite-plugin-cdn-import` 做 CDN 拆包，具体是怎么配置的？有没有遇到 CDN 资源加载失败的情况？怎么做降级？  
+**考察：** 构建优化实战  
+**要点：** 配置：指定包名 + CDN URL，插件自动在 HTML 注入 `<script>` 标签并在 Rollup 中 external 对应依赖；降级方案：`<script>` 的 `onerror` 回退到本地资源 / 备用 CDN；或用 `window.Vue` 检测是否加载成功。
+
+**Q59**【进阶】Webpack 的 Tree Shaking 原理是什么？为什么 CommonJS 模块无法被 Tree Shake？  
+**考察：** Tree Shaking  
+**要点：** 基于 ESM 的静态分析（import/export 在编译期确定），标记未使用的导出并在压缩阶段删除；CJS 是动态加载（`require` 可以在条件语句中），无法静态分析依赖关系。
+
+---
+
+## 十三、Node.js & NestJS 后端
+
+**Q60**【中等】Node.js 的事件循环（Event Loop）分哪几个阶段？`setTimeout`、`setImmediate`、`process.nextTick` 的执行顺序是什么？  
+**考察：** Node.js 运行时  
+**要点：** 6 个阶段：timers → pending callbacks → idle/prepare → poll → check → close；`process.nextTick` 在当前阶段结束后立即执行（微任务）；`setImmediate` 在 check 阶段；`setTimeout(fn, 0)` 在 timers 阶段。
+
+**Q61**【中等】NestJS 的依赖注入（DI）是怎么工作的？`@Injectable()`、`@Module()`、`providers` 之间的关系是什么？  
+**考察：** NestJS 核心机制  
+**要点：** `@Injectable()` 标记类可被注入；在 `@Module()` 的 `providers` 中注册；NestJS IoC 容器根据构造函数参数类型自动解析并注入实例；`exports` 用于跨模块共享 Provider。
+
+**Q62**【进阶】你在 AI Agent Platform 中将 NestJS 拆分为 LLM Module、RAG Module、Agent Module，模块之间如何通信？如果 RAG Module 需要调用 LLM Module 的能力，怎么设计？  
+**考察：** 模块化架构  
+**要点：** LLM Module 在 `exports` 中导出 `LLMService`；RAG Module 在 `imports` 中引入 LLM Module，通过构造函数注入 `LLMService`；或通过自定义事件（EventEmitter2）实现松耦合通信。
+
+---
+
+## 十四、MySQL & GraphQL
+
+**Q63**【中等】MySQL 的 `INNER JOIN`、`LEFT JOIN`、`RIGHT JOIN` 有什么区别？什么场景下用 `LEFT JOIN`？  
+**考察：** SQL 基础  
+**要点：** INNER JOIN 只返回两表匹配的行；LEFT JOIN 返回左表全部 + 右表匹配的（不匹配填 NULL）；场景：查询所有用户及其订单（包括没下单的用户）。
+
+**Q64**【中等】MySQL 索引的底层数据结构是什么？为什么用 B+ 树而不是 B 树或 Hash？  
+**考察：** 索引原理  
+**要点：** InnoDB 用 B+ 树；B+ 树叶子节点有序链表，支持范围查询；B 树非叶子节点也存数据，查询不稳定；Hash 只支持等值查询，不支持范围和排序。
+
+**Q65**【中等】GraphQL 相比 REST API 的核心优势是什么？有什么劣势？  
+**考察：** API 设计  
+**要点：** 优势：客户端按需查询字段（避免 over-fetching / under-fetching）、一次请求获取多资源、强类型 Schema；劣势：缓存复杂（无法用 HTTP 缓存）、N+1 查询问题、学习成本。
+
+---
+
+## 十五、Git & CI/CD 工程实践
+
+**Q66**【中等】`git rebase` 和 `git merge` 的区别？什么场景用 rebase，什么场景用 merge？  
+**考察：** Git 工作流  
+**要点：** merge 保留完整历史（产生 merge commit）；rebase 线性化历史（更干净但改写了提交记录）；个人分支同步主分支用 rebase，合入主分支用 merge（保留合并记录）。
+
+**Q67**【中等】`git reset --soft`、`--mixed`、`--hard` 的区别？误操作 `--hard` 后怎么恢复？  
+**考察：** Git 撤销  
+**要点：** soft 保留暂存区和工作区；mixed（默认）重置暂存区、保留工作区；hard 全部丢弃；恢复：`git reflog` 找到之前的 commit hash → `git reset --hard <hash>`。
+
+**Q68**【进阶】你的 GitHub Actions 流水线（Lint → Test → Build → Deploy）具体是怎么配置的？多环境发布（Dev / Staging / Prod）的分支策略是什么？  
+**考察：** CI/CD 实战  
+**要点：** 分支策略：`develop` → Dev 环境、`release/*` → Staging、`main` → Prod；Actions 配置：`on: push` 触发对应分支的 workflow，每个 job 依赖前一个（`needs`）；Prod 发布加 manual approval。
+
+**Q69**【中等】Docker 的镜像（Image）和容器（Container）有什么区别？`Dockerfile` 中 `COPY` 和 `ADD` 有什么区别？  
+**考察：** Docker 基础  
+**要点：** Image 是只读模板（多层文件系统）；Container 是 Image 的运行实例（可读写层）；`COPY` 纯复制文件；`ADD` 额外支持 URL 下载和 tar 自动解压，推荐默认用 `COPY`。
+
+---
+
+## 十六、React 基础（简历技能项）
+
+**Q70**【中等】React 的 `useState` 是同步还是异步？在事件处理函数中连续调用两次 `setState` 会触发几次渲染？  
+**考察：** React 状态更新  
+**要点：** React 18 默认所有场景批处理（Automatic Batching），连续 setState 只触发一次渲染；如果需要立即基于前值更新，使用函数式更新 `setState(prev => prev + 1)`。
+
+**Q71**【中等】React 的 `useEffect` 和 Vue 的 `watchEffect` 有什么异同？`useEffect` 的依赖数组传 `[]` 和不传分别是什么行为？  
+**考察：** 框架对比  
+**要点：** 相同：都是副作用自动追踪；不同：`useEffect` 需要手动声明依赖数组，`watchEffect` 自动收集；`[]` = 仅 mount 执行一次；不传 = 每次渲染都执行；缺少依赖会导致闭包陷阱。
+
+**Q72**【进阶】Vue3 和 React 在响应式机制上的本质区别是什么？各有什么优劣？  
+**考察：** 框架原理对比  
+**要点：** Vue 基于 Proxy 数据劫持（自动依赖收集，细粒度更新）；React 基于 `setState` 触发 Reconciliation（Virtual DOM diff，自顶向下重渲染）；Vue 更新更精准但响应式有心智负担（ref/reactive），React 模型更简单但可能有不必要的渲染（需 memo 优化）。
+
+---
+
 ## 快速自检清单
 
 | 模块 | 必须能答上来的问题 |
@@ -307,6 +419,12 @@ function useSSE(url: string) {
 | 分片上传 | Q37 Q38 Q39 |
 | 团队管理 | Q40 Q41 Q43 |
 | 系统设计 | Q44 Q45 |
+| CSS3 / HTML5 | Q51 Q52 Q55 |
+| Vite / Webpack | Q56 Q58 Q59 |
+| Node.js / NestJS | Q60 Q61 Q62 |
+| MySQL / GraphQL | Q63 Q64 Q65 |
+| Git / CI/CD | Q66 Q67 Q68 |
+| React | Q70 Q71 Q72 |
 
 ---
 
