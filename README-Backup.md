@@ -18,31 +18,55 @@
 
 ---
 
-## 🙋 个人简介
-
-- **9 年前端开发经验**，精通 Vue3 / TypeScript / React，有大型交易所、AI 数据平台等复杂项目的全生命周期交付经验  
-- 具备 **AI 大模型应用落地能力**（RAG / SSE Streaming / Function Calling / Prompt Engineering），主导过智能数据助手平台从 0 到 1 建设  
-- 具备 **Web3 区块链实战经验**（DEX 交易所 / 跨链桥 / 合约交互 / 多钱包适配），独立交付过去中心化交易所全前端  
-- 主导 **Monorepo 工程架构**设计与团队技术体系建设，管理 6+ 子项目，有编码规范、CR 流程、组件库治理落地经验  
-- 具备**全栈开发能力**（Node.js / NestJS），有 AI Service 层后端研发经验；兼具团队管理与新人培养能力
-
----
-
 ## 🛠 技能概览
 
-| 领域 | 技术栈 | 熟练度 |
-|------|--------|--------|
-| 💻 **前端技术** | ES6+ / TypeScript / WebSocket / CSS3 / HTML5 | 精通 / 熟练 |
-| 🧩 **前端框架** | Vue2·3 / React / Bootstrap | 精通 / 熟练 |
-| 📦 **前端工具** | Vite / Webpack / Rollup / Vitest / ESLint | 熟练应用 / 配置 |
-| 🖥 **Web 服务** | Node.js / Express / Koa / NestJS | 熟练应用 / 开发 |
-| 🗄 **数据库** | MySQL / GraphQL | 应用 / 熟练应用 |
-| 🤖 **AI 相关** | OpenAI / LangChain / AI SDK / SSE / Prompt Engineering / RAG | 熟练应用 / 开发 |
-| ⛓ **Web3** | Ethers.js / Web3.js / Viem / Privy / Wagmi | 熟练应用 / 开发 |
-| 👛 **钱包开发** | MetaMask / WalletConnect(1/2) / Keplr | 熟练应用 / 开发 |
-| 🏛 **架构 & 工程化** | Monorepo（Turborepo / Nx）/ 组件库开发 / 前端工程化体系 | 熟练应用 |
-| 🚀 **CI/CD** | GitHub Actions / Docker / 多环境发布（Dev / Staging / Prod） | 熟练应用 / 配置 |
-| 🔧 **开发工具** | VS Code / Cursor / Claude Code / Git / SVN | 熟练应用 |
+### 💻 前端技术
+**ES6+ / TypeScript / WebSocket / CSS3 / HTML5**（精通 / 熟练 / 使用开发）  
+熟练掌握 ES6+ 语法特性与 TypeScript 类型系统，具备复杂业务场景下的类型设计能力；深入理解 WebSocket 双向通信机制，有万级 QPS 实时数据推送经验。
+
+### 🖥 Web 服务
+**Node.js / Express / Koa / NestJS**（熟练应用 / 使用 / 开发）  
+熟练使用 NestJS 模块化架构搭建后端服务，有 AI Service 层（LLM / RAG / Agent 模块）全栈开发经验；了解中间件机制、依赖注入与 RESTful API 设计。
+
+### 🧩 前端框架
+**Vue2·3 / React / Bootstrap**（熟练应用 / 使用 / 开发）  
+精通 Vue3 Composition API + Pinia 状态管理，有多个大型项目（交易所 / 数据平台）生产实践；熟悉 React Hooks 与组件化开发模式。
+
+### 📦 前端工具
+**Vite / Webpack / Rollup / Vitest / ESLint**（熟练应用 / 配置）  
+熟练配置 Vite 构建优化（CDN 拆包 / Bundle 分析 / 按需加载），有 Rollup 组件库打包与 Vitest 单元测试实践经验；制定并落地团队 ESLint + Prettier 编码规范。
+
+### 🗄 数据库相关
+**MySQL / GraphQL**（应用 / 熟练应用）  
+掌握 MySQL 基础查询与表结构设计，了解 GraphQL Schema 定义与前端 Query / Mutation 数据交互。
+
+### 🔧 版本管理、开发工具
+**VS Code / Cursor / Claude Code / Git / SVN**（应用 / 熟练应用）  
+精通 Git 分支管理（Git Flow / Trunk-Based），熟练使用 Cursor + Claude Code 等 AI 辅助开发工具提升编码效率。
+
+### 🏗 项目搭建
+**Monorepo 模式 / 组件库文档 / 组件库编译 / 脚手架配置**（熟练应用）  
+有多个 `pnpm workspace` + Monorepo 工程从 0 到 1 搭建经验，涵盖组件库开发（50+ 组件）、自动化文档生成与 CLI 脚手架配置。
+
+### 👛 钱包开发
+**MetaMask / WalletConnect(1/2) / Keplr**（熟练应用 / 使用 / 开发）  
+设计过统一钱包连接抽象层（策略模式），封装 Injected Provider / Relay Protocol / Cosmos Signer 三类钱包适配，有跨链交易签名与网络切换实战经验。
+
+### ⛓ Web3
+**Ethers.js / Web3.js / Viem / Privy / Wagmi**（熟练应用 / 使用 / 开发）  
+熟练使用 Ethers.js 进行合约交互（ABI 编码 / Gas 估算 / 交易追踪），有 DEX 永续合约交易、ERC-20 跨链桥与 IBC 跨链开发经验；了解 Viem + Wagmi 现代 Web3 开发范式。
+
+### 🤖 AI 相关
+**OpenAI / LangChain / AI SDK / SSE Streaming / Prompt Engineering / RAG**（熟练应用 / 使用 / 开发）  
+主导过 AI Agent 平台全栈开发，落地 RAG 向量检索（Embedding + 语义召回）、SSE 流式交互、Function Calling 工具调用与结构化 Prompt 模板设计，有多模型（GPT-4o / Claude / DeepSeek）集成与降级策略经验。
+
+### 🚀 工程化 & CI/CD
+**GitHub Actions / Webhook / Docker / 自动化构建与部署 / 多环境发布（Dev / Staging / Prod）**（熟练应用 / 配置）  
+熟练配置 GitHub Actions 自动化流水线（Lint → Test → Build → Deploy），有 Docker 容器化部署与多环境（Dev / Staging / Prod）分支发布策略经验。
+
+### 🏛 架构设计 & 代码治理
+**Monorepo（Turborepo / Nx）/ 组件库开发 / 前端工程化体系建设**（熟练应用）  
+主导过多项目 Monorepo 架构设计与落地，统一管理 6+ 子项目的构建、依赖与发布流程；搭建前端工程化体系（编码规范 / CR 流程 / 自动化代码生成 / 组件库治理）。
 
 ---
 
