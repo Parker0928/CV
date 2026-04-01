@@ -36,7 +36,7 @@
 | 🧩 **前端框架** | Vue2·3 / React / Bootstrap | 精通 / 熟练 |
 | 📦 **前端工具** | Vite / Webpack / Rollup / Vitest / ESLint | 熟练应用 / 配置 |
 | 🖥 **Web 服务** | Node.js / Express / Koa / NestJS | 熟练应用 / 开发 |
-| 🗄 **数据库** | MySQL / GraphQL | 应用 / 熟练应用 |
+| 🗄 **数据库** | MySQL / GraphQL / PostgreSQL | 应用 / 熟练应用 |
 | 🤖 **AI 相关** | OpenAI / LangChain / AI SDK / SSE / Prompt Engineering / RAG | 熟练应用 / 开发 |
 | ⛓ **Web3** | Ethers.js / Web3.js / Viem / Privy / Wagmi | 熟练应用 / 开发 |
 | 👛 **钱包开发** | MetaMask / WalletConnect(1/2) / Keplr | 熟练应用 / 开发 |
