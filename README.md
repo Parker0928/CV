@@ -1,5 +1,5 @@
 <h1 align="center">于志鹏</h1>
-<p align="center"><strong>Senior Frontend Engineer</strong></p>
+<p align="center"><strong>资深前端工程师 / 全栈工程师</strong></p>
 <p align="center">
   📞 15807488252 &nbsp;·&nbsp;
   ✉️ <a href="mailto:Parker928@proton.me">Parker928@proton.me</a> &nbsp;·&nbsp;
@@ -20,7 +20,7 @@
 
 ## 🙋 个人简介
 
-- **8年以上前端及全栈开发经验**，精通 Vue3 / TypeScript / React，有大型交易所、AI 数据平台等复杂项目的全生命周期交付经验  
+- **9 年前端开发经验**，精通 Vue3 / TypeScript / React，有大型交易所、AI 数据平台等复杂项目的全生命周期交付经验  
 - 具备 **AI 大模型应用落地能力**（RAG / SSE Streaming / Function Calling / Prompt Engineering），主导过智能数据助手平台从 0 到 1 建设  
 - 具备 **Web3 区块链实战经验**（DEX 交易所 / 跨链桥 / 合约交互 / 多钱包适配），独立交付过去中心化交易所全前端  
 - 主导 **Monorepo 工程架构**设计与团队技术体系建设，管理 6+ 子项目，有编码规范、CR 流程、组件库治理落地经验  
