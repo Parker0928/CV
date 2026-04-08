@@ -1,5 +1,136 @@
 # 前端高级工程师面试题（含核心考察点+完整版标准答案）
 
+## 目录
+
+下方 **大章速览** 可一键跳到各篇；每章下的折叠列表含该章全部小节锚点。
+
+### 大章速览
+
+- [一、JavaScript 进阶与原理（高频核心）](#一javascript-进阶与原理高频核心)
+- [二、浏览器原理与网络通信（高阶必问）](#二浏览器原理与网络通信高阶必问)
+- [三、前端框架原理与实战（Vue/React 二选一深度）](#三前端框架原理与实战vuereact-二选一深度)
+- [四、前端工程化与构建工具](#四前端工程化与构建工具)
+- [五、前端性能优化（高频综合题）](#五前端性能优化高频综合题)
+- [六、手写代码高频题（高级工程师必背）](#六手写代码高频题高级工程师必背)
+- [七、项目实战与场景题（高阶面试必问）](#七项目实战与场景题高阶面试必问)
+- [八、高频面试逻辑题与开放题](#八高频面试逻辑题与开放题)
+
+<details>
+<summary><strong>一、JavaScript 进阶与原理（高频核心）</strong></summary>
+
+- [题目1](#题目1详细阐述闭包的本质形成条件内存机制结合实际业务场景说明闭包的应用场景以及闭包可能导致的内存泄漏问题和解决方案)
+- [题目2](#题目2对比原型链继承构造函数继承组合继承寄生组合继承es6-class继承的优缺点分析class继承的底层实现原理以及原型链污染的成因和防范措施)
+- [题目3](#题目3解释事件循环event-loop机制区分浏览器和nodejs事件循环的差异详细说明宏任务微任务的执行顺序结合promiseasyncawaitsettimeoutprocessnexttick写出复杂代码的执行结果)
+- [题目4](#题目4深入分析promise的a规范手写promise核心源码包含thencatchresolverejectallrace方法说明promise的状态流转值穿透异常捕获机制以及promiseallsettledpromiseany的使用场景)
+- [题目5](#题目5什么是函数柯里化和偏函数二者的区别是什么手写实现柯里化函数说明其在前端业务中的实际应用)
+- [题目6](#题目6讲解this的绑定规则默认绑定隐式绑定显式绑定new绑定分析箭头函数的this特性结合复杂场景代码判断this指向说明bind方法的底层实现和多次bind的效果)
+- [题目7](#题目7阐述垃圾回收机制标记清除引用计数的原理分析前端常见的内存泄漏场景闭包定时器dom引用事件监听未移除等如何通过chrome-devtools定位和解决内存泄漏问题)
+- [题目8](#题目8解释深拷贝和浅拷贝的区别手写实现一个支持正则datemapset函数循环引用的完整深拷贝函数对比jsonparsejsonstringify的缺陷)
+- [题目9](#题目9什么是异步编程对比回调函数promisegeneratorasyncawait四种异步方案的演进和优缺点分析asyncawait的底层实现原理generatorpromise)
+- [题目10](#题目10讲解变量提升函数提升的机制分析varletconst的区别说明暂时性死区的形成原因以及块级作用域的实现原理)
+
+</details>
+
+<details>
+<summary><strong>二、浏览器原理与网络通信（高阶必问）</strong></summary>
+
+- [题目1](#题目1从输入url到页面渲染完成整个过程发生了什么详细拆解dns解析tcp三次握手http请求响应处理浏览器渲染流程)
+- [题目2](#题目2阐述浏览器缓存机制区分强缓存expirescache-control和协商缓存last-modifiedif-modified-sinceetagif-none-match的优先级原理和应用场景如何配置缓存策略优化页面加载)
+- [题目3](#题目3什么是跨域浏览器同源策略的限制范围有哪些列举所有跨域解决方案说明每种方案的原理优缺点和适用场景重点分析cors的简单请求和复杂请求区别)
+- [题目4](#题目4讲解虚拟dom的核心原理虚拟dom的优势是什么diff算法的核心流程树diff组件diff元素diffkey值的作用和不合理使用key的弊端)
+- [题目5](#题目5分析浏览器重排回流和重绘的原理哪些操作会触发重排重绘如何通过代码优化减少重排重绘)
+- [题目6](#题目6阐述http10http11http2http3的核心区别http2的多路复用头部压缩服务器推送原理https的加密流程对称加密非对称加密ssltls握手过程)
+- [一、HTTP1.0、HTTP1.1、HTTP2、HTTP3核心区别](#一http10http11http2http3核心区别)
+- [二、HTTP2核心特性原理](#二http2核心特性原理)
+- [三、HTTPS加密流程与SSL/TLS握手](#三https加密流程与ssltls握手)
+- [题目7](#题目7什么是web安全详细说明xss攻击存储型反射型dom型的原理危害和防范措施csrf攻击的原理和防范方案以及sql注入点击劫持中间人攻击的防护策略)
+- [一、XSS跨站脚本攻击](#一xss跨站脚本攻击)
+- [二、CSRF跨站请求伪造](#二csrf跨站请求伪造)
+- [三、其他常见攻击防护](#三其他常见攻击防护)
+- [题目8](#题目8讲解浏览器的同源策略iframe跨域通信的实现方式postmessage的使用注意事项如何实现不同子域名主域名之间的跨域数据共享)
+- [题目9](#题目9分析service-worker的原理生命周期pwa的核心特性service-worker实现离线缓存消息推送的流程以及注册和使用service-worker的注意事项)
+- [题目10](#题目10什么是内存溢出和内存泄漏二者的区别是什么在前端单页应用中如何监控和优化内存使用)
+
+</details>
+
+<details>
+<summary><strong>三、前端框架原理与实战（Vue/React 二选一深度）</strong></summary>
+
+- [Vue 方向](#vue-方向)
+- [Vue · 题目1](#题目1分析vue2和vue3的核心差异vue3的composition-api相比options-api的优势vue3响应式原理proxy-vs-objectdefineproperty的区别proxy的优势和缺陷)
+- [Vue · 题目2](#题目2详细讲解vue的响应式原理数据劫持依赖收集派发更新的完整流程computed和watch的底层实现原理以及二者的区别和使用场景)
+- [Vue · 题目3](#题目3vue的虚拟dom和diff算法实现细节vue2和vue3-diff算法的优化点vue的key值为什么不能用indexv-for和v-if为什么不能连用)
+- [Vue · 题目4](#题目4vue组件通信的所有方式分析每种方式的适用场景和底层原理)
+- [Vue · 题目5](#题目5vuex和pinia的核心原理pinia相比vuex的优势手写简易版vuexpinia)
+- [Vue · 题目6](#题目6vue的生命周期钩子函数执行流程父子组件生命周期执行顺序异步组件和keep-alive的原理及应用场景)
+- [Vue · 题目7](#题目7vue的自定义指令插件机制的实现原理如何封装可复用的vue组件和指令)
+- [Vue · 题目8](#题目8vue3的teleportsuspense组件的原理和使用场景vue3的编译优化做了哪些改进)
+- [React 方向](#react-方向)
+- [React · 题目1](#题目1讲解react的fiber架构原理为什么要引入fiberfiber的调和reconciliation流程时间分片的实现机制解决了react15的什么问题)
+- [React · 题目2](#题目2react的hooks原理usestateuseeffectusecallbackusememouseref的底层实现hooks的链式调用规则为什么hooks不能在条件语句中使用)
+- [React · 题目3](#题目3react类组件和函数组件的区别react的虚拟dom和diff算法react的key值作用列表渲染的优化)
+- [React · 题目4](#题目4useeffect的依赖项原理如何避免useeffect无限循环useeffect和uselayouteffect的执行时机和区别)
+- [React · 题目5](#题目5react组件通信方式react-context的原理和性能优化状态管理库的选型和原理)
+- [React · 题目6](#题目6react的合成事件机制为什么要设计合成事件合成事件和原生事件的区别事件冒泡和捕获在react中的处理)
+- [React · 题目7](#题目7react的性能优化手段原理和使用场景)
+- [React · 题目8](#题目8react18的新特性核心原理和业务应用)
+
+</details>
+
+<details>
+<summary><strong>四、前端工程化与构建工具</strong></summary>
+
+- [题目1](#题目1什么是前端工程化包含哪些核心模块如何搭建一套完整的前端工程化体系)
+- [题目2](#题目2对比webpackviterollupparcel构建工具的核心差异vite的底层原理相比webpack的优势)
+- [题目3](#题目3webpack的核心原理loader和plugin的区别常用loader和plugin的作用手写简易webpack-loader和pluginwebpack的打包流程)
+- [题目4](#题目4tree-shaking原理适用场景及优化配置如何实现webpackvite打包体积优化)
+- [题目5](#题目5前端模块化演进历程对比commonjsamdcmdes6-module的区别)
+
+</details>
+
+<details>
+<summary><strong>五、前端性能优化（高频综合题）</strong></summary>
+
+- [题目1](#题目1前端性能优化全方案从网络渲染代码资源构建五大维度拆解)
+- [一、网络层面优化](#一网络层面优化)
+- [二、渲染层面优化](#二渲染层面优化)
+- [三、代码层面优化](#三代码层面优化)
+- [四、资源层面优化](#四资源层面优化)
+- [五、构建层面优化](#五构建层面优化)
+- [题目2](#题目2如何做前端性能监控与指标分析核心性能指标有哪些)
+
+</details>
+
+<details>
+<summary><strong>六、手写代码高频题（高级工程师必背）</strong></summary>
+
+- [题目1](#题目1手写防抖debounce节流throttle函数立即执行立即取消版)
+- [题目2](#题目2手写instanceof原理)
+- [题目3](#题目3手写数组去重多种方案)
+- [题目4](#题目4手写数组flat扁平化函数支持深度控制)
+
+</details>
+
+<details>
+<summary><strong>七、项目实战与场景题（高阶面试必问）</strong></summary>
+
+- [题目1](#题目1大型前端项目如何做权限控制路由权限按钮权限接口权限)
+- [题目2](#题目2前端单点登录sso实现原理及方案)
+- [题目3](#题目3前端大数据量渲染卡顿解决方案)
+
+</details>
+
+<details>
+<summary><strong>八、高频面试逻辑题与开放题</strong></summary>
+
+- [题目1](#题目1实现一个函数将驼峰命名字符串转为短横线连接如camelcase--camel-case)
+- [题目2](#题目2如何实现前端文件上传断点续传大文件分片上传)
+- [题目3](#题目3你平时如何排查前端线上bug有哪些排查思路)
+
+</details>
+
+---
+
 ## 一、JavaScript 进阶与原理（高频核心）
 
 ### 题目1：详细阐述闭包的本质、形成条件、内存机制，结合实际业务场景说明闭包的应用场景，以及闭包可能导致的内存泄漏问题和解决方案。
