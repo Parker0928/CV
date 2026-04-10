@@ -1,6 +1,6 @@
 # 面试题库 — 于志鹏（前端技术负责人 / 9 年经验）
 
-> 根据简历内容定向出题，覆盖 8 大核心模块，共 60+ 道题。  
+> 根据简历内容定向出题，覆盖 8 大核心模块，并含 **React / Next.js / React Native** 扩展，共 75+ 道题。  
 > 每道题标注【难度】和【考察点】，部分附参考答案要点。
 
 ---
@@ -402,6 +402,66 @@ function useSSE(url: string) {
 **考察：** 框架原理对比  
 **要点：** Vue 基于 Proxy 数据劫持（自动依赖收集，细粒度更新）；React 基于 `setState` 触发 Reconciliation（Virtual DOM diff，自顶向下重渲染）；Vue 更新更精准但响应式有心智负担（ref/reactive），React 模型更简单但可能有不必要的渲染（需 memo 优化）。
 
+**Q73**【中等】`useMemo`、`useCallback`、`React.memo` 分别解决什么问题？什么情况下用了反而有害（过度优化）？  
+**考察：** 性能优化与依赖心智  
+**要点：** `useMemo` 缓存计算结果；`useCallback` 缓存函数引用（常配合子组件 `memo` 避免重渲染）；`memo` 浅比较 props。有害场景：依赖项不稳定导致每次失效、简单计算反而增加对比开销；列表项 key 错误时 memo 也救不了。
+
+**Q74**【进阶】React 18 的 `useTransition`、`startTransition` 与并发渲染解决了什么用户可感知问题？和 `debounce` 有什么本质不同？  
+**考察：** Concurrent React  
+**要点：** 将更新标为「可中断的低优 transition」，避免输入框卡顿（高优 urgent 更新先画）；与 debounce 不同：transition 是调度层面的优先级，不是固定时间窗口。
+
+**Q75**【中等】`useLayoutEffect` 与 `useEffect` 的执行时机差异？什么场景必须用 `useLayoutEffect`？  
+**考察：** 副作用与 DOM  
+**要点：** `useLayoutEffect` 在浏览器 paint 之前同步执行，适合测量 DOM、避免闪烁；`useEffect` 在 paint 之后异步执行；SSR 中 `useLayoutEffect` 会告警，需 `useEffect` 或动态导入。
+
+---
+
+## 十七、Next.js（App Router 与渲染策略）
+
+**Q76**【中等】Next.js **App Router** 与 **Pages Router** 在路由与数据获取上的主要差异？新项目更推荐哪种？  
+**考察：** 元框架路由模型  
+**要点：** App Router 基于 `app/` 目录、`layout.tsx` 嵌套布局、默认服务端组件；数据获取更贴近 RSC；Pages Router 的 `getServerSideProps` 等与 `pages/` 一一对应。新项目一般选 App Router（长期维护方向）。
+
+**Q77**【进阶】什么是 **React Server Component（RSC）**？在 Next.js App Router 中如何划分 Server Component 与 Client Component（`'use client'`）？  
+**考察：** RSC 边界  
+**要点：** RSC 在服务端执行、可直访 DB/密钥、不参与首包 hydration；需交互、状态、浏览器 API 的用 Client Component；Server 可组合 Client，注意 children 传递与 bundle 体积。
+
+**Q78**【中等】**SSR、SSG、ISR** 各自适用场景？在 Next.js 中如何表达（如 `dynamic`、`revalidate`）？  
+**考察：** 渲染策略选型  
+**要点：** SSR 个性化/强实时；SSG 内容稳定、SEO；ISR 定期再生成折中。App Router 里 `fetch` 缓存与 `revalidate`、Route Segment Config 控制静态/动态。
+
+**Q79**【进阶】`revalidatePath` / `revalidateTag` 与 `fetch(..., { next: { tags: [] } })` 如何配合做按需缓存失效？  
+**考察：** 缓存与数据一致性  
+**要点：** 标签化缓存后，在 Server Action 或 Route Handler 里调用 `revalidateTag` 使相关请求失效；`revalidatePath` 按路径批量失效；需理解默认缓存策略与动态 API（cookies/headers）会使路由变动态。
+
+**Q80**【中等】Next.js 的 **Route Handlers**（`app/api/.../route.ts`）与单独 NestJS 后端并存时，如何划分职责？  
+**考察：** BFF 与全栈边界  
+**要点：** Route Handlers 适合轻量 BFF、鉴权转发、与页面同仓；重业务、长连接、复杂领域逻辑仍放独立后端；注意 env、超时与冷启动。
+
+---
+
+## 十八、React Native（跨端与原生）
+
+**Q81**【中等】React Native 与 React（DOM）在**渲染模型**上的核心差异？为什么不能用完整 CSS？  
+**考察：** RN 基础  
+**要点：** RN 用原生组件（UIView/Android View）通过桥接/新架构通信，非浏览器 DOM；样式用 **StyleSheet** 子集（Flex、无级联、无单位默认逻辑像素）；布局默认 Flex column。
+
+**Q82**【进阶】**旧桥（Bridge）** 与 **新架构（Fabric + TurboModules + JSI）** 各解决什么问题？  
+**考察：** RN 性能与互操作  
+**要点：** 旧桥异步 JSON 序列化、易成瓶颈；JSI 让 JS 持有 C++ HostObject 引用、同步调用更可行；Fabric 同步布局能力增强；TurboModules 懒加载原生模块。
+
+**Q83**【中等】RN 列表性能优化常见手段？与 Web 虚拟列表思路有何相通之处？  
+**考察：** 移动端性能  
+**要点：** `FlatList`/`SectionList`（windowing）、`keyExtractor`、`getItemLayout`（固定高）、`memo` 行组件；避免匿名函数与内联 style 对象；重度场景可选 FlashList 等；与 Web 虚拟列表同为只渲染可视区。
+
+**Q84**【中等】**React Navigation** 中 Stack / Tab / Native Stack 选型注意什么？深度链接与状态持久化怎么做？  
+**考察：** RN 导航  
+**要点：** Native Stack 性能更好（原生转场）；Tab 嵌套注意 header 与手势；深度链接用 linking 配置；状态持久化 `persist` 与 SecureStore 敏感信息分离。
+
+**Q85**【进阶】Monorepo 中如何让 Web（Next/Vite）与 **React Native 共享业务逻辑**（类型、API、状态）？典型坑是什么？  
+**考察：** 跨端工程化  
+**要点：** `packages/core` 纯 TS + 平台无关；平台相关通过 `*.native.ts` / `*.web.ts` 或依赖注入拆分；避免在共享包直接引用 `react-dom` / RN 专有 API；Babel/Metro 与 bundler 的 moduleResolution 需对齐。
+
 ---
 
 ## 快速自检清单
@@ -424,7 +484,10 @@ function useSSE(url: string) {
 | Node.js / NestJS | Q60 Q61 Q62 |
 | MySQL / GraphQL | Q63 Q64 Q65 |
 | Git / CI/CD | Q66 Q67 Q68 |
-| React | Q70 Q71 Q72 |
+| React | Q70–Q75 |
+| Next.js | Q76 Q77 Q78 Q80 |
+| Next.js 缓存 | Q79 |
+| React Native | Q81–Q85 |
 
 ---
 

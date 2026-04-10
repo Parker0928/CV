@@ -13,6 +13,8 @@
   <img src="https://img.shields.io/badge/TypeScript-精通-3178c6?logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/NestJS-熟练-e0234e?logo=nestjs&logoColor=white" />
   <img src="https://img.shields.io/badge/React-熟练-61dafb?logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Next.js-熟悉-000000?logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/React%20Native-熟悉-61dafb?logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/Node.js-熟练-339933?logo=nodedotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/AI%2FLLM-熟练-ff6f00?logo=openai&logoColor=white" />
   <img src="https://img.shields.io/badge/Web3-熟练-f6851b?logo=web3dotjs&logoColor=white" />
@@ -22,7 +24,7 @@
 
 ## 🙋 个人简介
 
-- **9 年全栈开发经验**，精通 Vue3 / TypeScript / React 前端技术栈，熟练 Node.js / NestJS 后端开发，有大型交易所、AI 数据平台等复杂项目的全栈交付经验  
+- **9 年全栈开发经验**，精通 Vue3 / TypeScript / React 前端技术栈，熟悉 **Next.js（App Router / RSC）** 与 **React Native** 跨端模型，熟练 Node.js / NestJS 后端开发，有大型交易所、AI 数据平台等复杂项目的全栈交付经验  
 - 具备 **AI 大模型全栈落地能力**，主导过智能数据助手平台从 0 到 1 建设：前端（Vue3 流式交互）+ 后端（NestJS AI Service 层 / RAG / Function Calling / 多模型集成）  
 - 具备 **Web3 区块链全栈经验**（DEX 交易所 / 跨链桥 / 合约交互 / 多钱包适配），独立交付过去中心化交易所全前端  
 - 主导 **Monorepo 全栈工程架构**设计（前端 + 后端 + 共享 SDK），管理 6+ 子项目，有 CI/CD 流水线、Docker 部署、多环境发布落地经验  
@@ -36,6 +38,7 @@
 |------|--------|--------|
 | 💻 **前端开发** | ES6+ / TypeScript / WebSocket / CSS3 / HTML5 | 精通 / 熟练 |
 | 🧩 **前端框架** | Vue2·3 / React / Bootstrap | 精通 / 熟练 |
+| ⚛️ **React 生态** | Next.js / React Native | 熟悉 · 持续深化 |
 | 📦 **构建工具** | Vite / Webpack / Rollup / Vitest / ESLint | 熟练应用 / 配置 |
 | 🖥 **后端开发** | Node.js / Express / Koa / NestJS | 熟练应用 / 开发 |
 | 🗄 **数据库 & API** | MySQL / PostgreSQL / GraphQL / RESTful API | 应用 / 熟练应用 |

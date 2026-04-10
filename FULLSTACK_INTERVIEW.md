@@ -1,6 +1,6 @@
 # 全栈面试题库 — 于志鹏（全栈技术负责人 / 9 年经验）
 
-> 基于全栈简历定向出题，覆盖前端 + 后端 + AI + Web3 + DevOps 五大方向，共 80 道题。  
+> 基于全栈简历定向出题，覆盖前端 + 后端 + AI + Web3 + DevOps 五大方向，并含 **React / Next.js / React Native** 与全栈协作，共 90+ 道题。  
 > 每道题标注【难度】和【考察点】，附参考答案要点。
 
 ---
@@ -320,6 +320,42 @@ type DtoToParams<T> = ???
 
 ---
 
+## 十五、React、Next.js 与 React Native（全栈协作）
+
+**Q55**【中等】全栈项目里 **Next.js Route Handlers** 与 **NestJS REST** 同时存在时，你如何划分鉴权、错误码与日志追踪？  
+**考察：** BFF 分层  
+**要点：** 页面同源轻量逻辑（cookie 会话、聚合请求）放 Route Handlers；领域服务、长任务、队列仍归 Nest；统一 `traceId` 由网关或中间层注入；错误体格式约定一致便于前端拦截器处理。
+
+**Q56**【进阶】Next.js App Router 下 **Server Component** 直接查库、**Client Component** 调你现有 Nest API，如何避免重复请求与缓存撕裂？  
+**考察：** RSC + 独立后端  
+**要点：** 首屏数据优先 RSC `fetch`（可带缓存/revalidate）；客户端 hydration 后用 SWR/React Query 与 key 对齐；敏感数据仅服务端取；理解 Next 对 `fetch` 的默认缓存与动态路由边界。
+
+**Q57**【中等】**SSR** 页面每次请求都打 Nest，如何减轻后端压力？Next 侧能做什么？  
+**考察：** 渲染与缓存  
+**要点：** ISR/`revalidate`、CDN 边缘缓存、Stale-While-Revalidate；Nest 侧缓存热点读（Redis）；对个性化路由显式标记 dynamic 避免误缓存。
+
+**Q58**【进阶】Monorepo 内 **React Native App** 与 **Web（Vue/React）** 共享 `packages/sdk` 调用同一 Nest API，`genapi` 生成的客户端如何兼顾 RN 的 Metro 打包与 Web 的 bundler？  
+**考察：** 跨端 SDK  
+**要点：** SDK 保持纯 TS、无 DOM；入口区分或 `exports` 字段；避免 Node 专有模块泄漏到 RN；axios/fetch 抽象为可注入 adapter；环境变量用 `react-native-config` 等分平台注入。
+
+**Q59**【中等】React Native **新架构**（Fabric、TurboModules、JSI）对现有原生模块集成有什么影响？  
+**考察：** RN 升级与混合开发  
+**要点：** 新模块推荐 TurboModule 规范；旧桥模块逐步迁移；同步布局能力增强；需关注第三方库兼容性矩阵与 RN 版本。
+
+**Q60**【中等】RN 里如何做**安全存储**（Token）？与 Web 的 HttpOnly Cookie 模型差异？  
+**考察：** 移动端安全  
+**要点：** 优先 Keychain/Keystore（expo-secure-store、react-native-keychain）；避免 AsyncStorage 明文长期存敏感令牌；注意越狱/Root 风险与证书绑定等补充手段。
+
+**Q61**【进阶】用 **Expo** 与 **裸 RN（Bare Workflow）** 的选型依据？与团队已有原生能力如何匹配？  
+**考察：** RN 工程选型  
+**要点：** Expo 迭代快、OTA（EAS Update）、适合标准场景；裸 RN 适合重度自定义原生、已有原生团队；EAS Build 可折中。
+
+**Q62**【中等】团队主栈是 Vue3，你要引入 **Next.js** 做官网/文档或 BFF，技术负责人要评估哪些风险？  
+**考察：** 多框架治理  
+**要点：** 招聘与 CR 规范、部署拓扑（Node vs 静态导出）、SEO 需求、与现有 CI/CD 统一；文档与脚手架降低上手成本。
+
+---
+
 ## 快速自检清单
 
 | 模块 | 必须能答上来的问题 |
@@ -338,6 +374,7 @@ type DtoToParams<T> = ???
 | Monorepo | Q45 Q46 |
 | 综合场景 | Q47 Q48 Q50 |
 | 手写代码 | Q51 Q52 Q53 |
+| React / Next / RN 全栈 | Q55 Q56 Q58 Q60 |
 
 ---
 

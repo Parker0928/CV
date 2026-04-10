@@ -12,6 +12,8 @@
   <img src="https://img.shields.io/badge/Vue3-精通-42b883?logo=vuedotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/TypeScript-精通-3178c6?logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/React-熟练-61dafb?logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Next.js-熟悉-000000?logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/RN-熟悉-61dafb?logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/Web3-熟练-f6851b?logo=web3dotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/AI%2FLLM-熟练-ff6f00?logo=openai&logoColor=white" />
 </p>
@@ -22,6 +24,7 @@
 
 - **7年前端开发 + 2年全栈开发经验**，精通 Vue3 / TypeScript / React，有大型交易所、AI 数据平台等复杂项目的全生命周期交付经验  
 - 具备 **AI 大模型应用落地能力**（RAG / SSE Streaming / Function Calling / Prompt Engineering），主导过智能数据助手平台从 0 到 1 建设  
+- 熟悉 **React 生态扩展**：Next.js（App Router、SSR/SSG/ISR、服务端与客户端组件边界）与 **React Native**（跨端模型、新架构与性能要点），能与 Vue 技术栈做选型对比与团队补位
 - 具备 **Web3 区块链实战经验**（DEX 交易所 / 跨链桥 / 合约交互 / 多钱包适配），独立交付过去中心化交易所全前端  
 - 主导 **Monorepo 工程架构**设计与团队技术体系建设，管理 6+ 子项目，有编码规范、CR 流程、组件库治理落地经验  
 - 具备**全栈开发能力**（Node.js / NestJS），有 AI Service 层后端研发经验；兼具团队管理与新人培养能力
@@ -34,6 +37,7 @@
 |------|--------|--------|
 | 💻 **前端技术** | ES6+ / TypeScript / WebSocket / CSS3 / HTML5 | 精通 / 熟练 |
 | 🧩 **前端框架** | Vue2·3 / React / Bootstrap | 精通 / 熟练 |
+| ⚛️ **React 生态** | Next.js（App Router / RSC）/ React Native | 熟悉 · 持续深化 |
 | 📦 **前端工具** | Vite / Webpack / Rollup / Vitest / ESLint | 熟练应用 / 配置 |
 | 🖥 **Web 服务** | Node.js / Express / Koa / NestJS | 熟练应用 / 开发 |
 | 🗄 **数据库** | MySQL / GraphQL / PostgreSQL | 应用 / 熟练应用 |
