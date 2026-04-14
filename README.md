@@ -151,13 +151,13 @@
 
 支持多链资产跨链转移的 Web 应用，用户可连接 MetaMask、WalletConnect v1/v2、Keplr 等钱包，在 Ethereum 与 Cosmos 生态之间进行资产查询、跨链交易与流动性管理，日均处理跨链交易 1000+ 笔。
 
-**🔩 技术栈：** `Vue3` `TSX` `TypeScript` `CssRender` `CosmJS` `Ethers.js` `Pinia`
+**🔩 技术栈：** `React` `TSX` `TypeScript` `Emotion` `CosmJS` `Ethers.js` `Zustand`
 
 - 设计**统一钱包连接抽象层**（`WalletAdapter`），封装 MetaMask（Injected Provider）、WalletConnect v1/v2（Relay Protocol）、Keplr（Cosmos Signer）三类钱包的连接 / 断开 / 签名 / 网络切换等行为，通过**策略模式**实现钱包适配，新增钱包支持**从 1 周缩短至 1 天**。  
 - 基于 **Ethers.js** 封装 Ethereum 侧跨链操作（ERC-20 Approve / Bridge 合约调用），基于 **CosmJS** 封装 Cosmos 侧 **IBC MsgTransfer** 跨链交易，实现**双向跨链**资产查询、余额同步与交易发送。  
-- 通过 Pinia 拆分 bridge、transfer、wallet 三个状态模块，管理跨链源 / 目标链选择、Token 列表、交易状态与历史记录，结合 `watch` + 链切换事件实现余额与汇率**实时刷新**。  
+- 通过 Zustand 拆分 bridge、transfer、wallet 三个状态模块，管理跨链源 / 目标链选择、Token 列表、交易状态与历史记录，结合 `useEffect` + 链切换事件实现余额与汇率**实时刷新**。  
 - 实现**跨链交易状态追踪**，轮询链上交易 Receipt 与 IBC Packet 确认状态，前端展示交易进度（**Pending → Confirming → Completed**），支持交易哈希跳转区块链浏览器。  
-- 基于 **CssRender** 实现运行时**主题切换**（Dark / Light），通过 CSS 变量动态注入，适配品牌视觉规范。
+- 基于 **Emotion** 实现运行时**主题切换**（Dark / Light），通过 CSS 变量动态注入，适配品牌视觉规范。
 
 ---
 
