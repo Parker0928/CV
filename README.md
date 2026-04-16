@@ -29,7 +29,7 @@
 - **复杂业务落地** — 主导交易系统、跨链系统、AI 数据系统等高复杂度场景，具备业务建模与工程化推进能力。  
 - **AI 工程实战** — RAG + SSE + Function Calling 全链路落地，检索准确率 **65% → 92%**，首字响应 **200ms 内**。  
 - **高并发实时系统** — 交易场景支撑 **10000+ 条/秒**行情推送，毫秒级刷新；DEX 首屏 **3s → 0.8s**。  
-- **跨端交付能力** — 完整交付 React Native 移动钱包（iOS/Android），冷启动时间降低 **35%**。  
+- **跨端交付能力** — 完整交付 Flutter 与 React Native 两套移动端产品（iOS/Android），冷启动时间降低 **35%**。  
 - **工程化治理** — Monorepo 统管 **6+ 子项目**，多项目依赖安装时间减少 **70%**，发布流程标准化。  
 - **团队效能提升** — 推动 Vue2 → Vue3 + TypeScript 迁移，研发效率 **+40%**；建立 CR/PR 机制与 Onboarding 体系，新人上手 **4 周 → 2 周**。
 
@@ -41,7 +41,8 @@
 |------|--------|--------|
 | 前端基础 | JavaScript (ES6+) / TypeScript / HTML5 / CSS3 / WebSocket | 精通 |
 | 前端框架 | Vue2/3 / React | 精通 / 熟练 |
-| React 生态 | Next.js（App Router / RSC）/ React Native（Expo） | 熟练 |
+| React 生态 | Next.js（App Router / RSC） | 熟练 |
+| 跨端移动 | Flutter / Dart / React Native（Expo） | 熟练 |
 | 工程化 | Vite / Webpack / Rollup / Vitest / ESLint / Prettier | 熟练 |
 | 服务端 | Node.js / NestJS / Express / Koa | 熟练 |
 | 数据与接口 | MySQL / PostgreSQL / GraphQL / OpenAPI | 熟练 |
@@ -111,16 +112,32 @@
 
 > 2023.08 - 2024.06 ｜ 角色：前端负责人 / 核心开发 ｜ 与 DEX 并行
 
-基于 React Native + Expo 构建的去中心化移动钱包，支持多链资产管理、转账签名、DApp 连接与行情查询。
+基于 **Flutter** 构建的去中心化移动钱包，支持多链资产管理、转账签名、DApp 连接与行情查询；一套 Dart 代码覆盖 iOS/Android，在渲染与启动路径上较传统跨端方案更易做精细化性能治理。
 
-**技术栈：** `React Native` `Expo` `TypeScript` `Ethers.js` `WalletConnect v2` `Redux Toolkit` `React Navigation`
+**技术栈：** `Flutter` `Dart` `web3dart` `WalletConnect v2（Reown）` `Riverpod` `go_router` `flutter_secure_storage`
 
-- 基于 Expo 构建跨平台钱包应用（iOS/Android），采用 Keychain/Keystore 加密存储助记词与私钥，兼顾安全性与跨端一致性。  
-- 封装钱包核心能力（创建/导入、助记词管理、签名与交易发送），并实现转账、资产明细、交易记录等关键流程。  
-- 集成 WalletConnect v2，支持移动端连接 DApp 发起签名请求，完成会话管理、链切换与请求授权流程。  
-- 实现多链资产聚合展示与价格行情拉取，支持主流 EVM 网络资产余额查询与实时刷新。  
-- 完成关键页面性能优化（列表虚拟化、分包加载、图片缓存），冷启动时间降低约 **35%**，高频页面流畅度显著提升。  
-- 建立错误监控与埋点体系，覆盖签名失败、网络异常、会话中断等核心链路，线上问题定位效率提升约 **50%**。
+- 基于 Flutter 单代码库交付 iOS/Android，通过 `flutter_secure_storage` 等对接系统 **Keychain / Keystore** 加密存储助记词与私钥，并结合生物识别门禁降低敏感操作误触风险。  
+- 封装钱包域核心能力（创建/导入、助记词与派生路径管理、离线签名与交易广播），落地转账、资产明细、交易记录等闭环流程。  
+- 集成 WalletConnect v2（Reown 生态），在移动端完成深度链接 / 二维码会话建立、DApp 签名请求展示、链切换与授权确认等完整会话生命周期。  
+- 实现多链资产聚合与价格行情拉取，支持主流 EVM 网络余额批量查询与列表场景下的增量刷新策略。  
+- 针对首屏与列表场景做性能治理（`ListView` 懒构建与 item 复用、首帧数据分批注入、图片缓存与关键 isolate 计算），冷启动时间降低约 **35%**，高频页面滑动与签名流程流畅度显著提升。  
+- 建立错误监控与埋点体系，覆盖签名失败、RPC 超时、会话中断等核心链路，线上问题定位效率提升约 **50%**。
+
+### Pump（链上资产发射与交易平台 · 移动端）
+
+> 2024.06 - 2024.11 ｜ 角色：前端负责人 / 核心开发 ｜ 与 AI DATA 阶段性并行
+
+基于 React Native + Expo 构建的链上资产一键发射与实时交易移动应用，支持代币创建、Bonding Curve 定价、实时行情、快捷买卖与社区互动，面向高频 Meme/Fair Launch 场景。
+
+**技术栈：** `React Native` `Expo` `TypeScript` `Ethers.js` `WalletConnect v2` `Redux Toolkit` `React Navigation` `React Native Reanimated`
+
+- 基于 Expo Managed Workflow 快速搭建 iOS/Android 双端应用，利用 EAS Build + EAS Update 实现云端构建与 OTA 热更新，版本发布周期由 **2 天缩短至 2 小时**。  
+- 设计代币发射流程（参数配置 → 合约部署 → Bonding Curve 初始化 → 交易开放），前端完成多步表单校验、Gas 预估与交易签名全链路，发射成功率达 **98%+**。  
+- 实现实时交易行情模块，通过 WebSocket 推送 Tick 级价格与深度数据，结合 `react-native-reanimated` 驱动 K 线与价格跳动动画，帧率稳定 **60fps**。  
+- 封装快捷买卖面板，支持滑杆定额、一键 Max、Gas 档位选择与交易预览，从下单到链上确认平均耗时 **< 3s**（热钱包场景）。  
+- 集成 WalletConnect v2 与 Expo Deep Link，支持外部钱包扫码连接与应用内签名双模式，覆盖 MetaMask、Trust Wallet 等主流钱包。  
+- 构建社区动态 Feed 流（项目公告、持仓排行、评论互动），采用 `FlashList` 替代 FlatList，万级列表滚动性能提升约 **5 倍**，内存占用降低 **40%**。  
+- 落地性能治理组合拳（Hermes 引擎、图片预加载与渐进式渲染、Bundle 分包与按需加载），冷启动时间从 **2.8s 降至 1.6s**，整体包体积减少约 **30%**。
 
 ### 去中心化交易所（DEX）
 
