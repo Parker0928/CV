@@ -1,4 +1,4 @@
-## 六、React Native + Expo
+## 五、React Native + Expo
 
 ### 1. New Architecture（Fabric + TurboModules + JSI）？
 
@@ -62,7 +62,7 @@
 
 ---
 
-## 七、Flutter / Dart
+## 六、Flutter / Dart
 
 ### 1. 三棵树职责？
 
@@ -130,7 +130,7 @@
 
 ---
 
-## 八、Web3 / 区块链
+## 七、Web3 / 区块链
 
 ### 1. Ethers v5 vs v6 与三大抽象？
 
@@ -198,7 +198,7 @@
 
 ---
 
-## 九、AI / LLM 应用
+## 八、AI / LLM 应用
 
 ### 1. RAG 与 Embedding？
 
@@ -262,7 +262,7 @@
 
 ---
 
-## 十、Node.js / NestJS
+## 九、Node.js / NestJS
 
 ### 1. 事件循环阶段与 `nextTick`？
 
@@ -326,7 +326,7 @@
 
 ---
 
-## 十一、工程化 / Monorepo / 性能
+## 十、工程化 / Monorepo / 性能
 
 ### 1. Monorepo vs Multirepo？
 
@@ -394,7 +394,7 @@
 
 ---
 
-## 十二、WebSocket / 实时通信
+## 十一、WebSocket / 实时通信
 
 ### 1. 握手与对比长轮询/SSE？
 

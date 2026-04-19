@@ -1,95 +1,24 @@
 # 全栈高频面试题与答案
 
-> 基于仓库根目录 `README.md` 技术栈整理：Vue / React 对照、Vue3、React、TypeScript、Next.js、React Native + Expo、Flutter、Web3、AI/LLM、Node/NestJS、工程化与 WebSocket。
+> 基于仓库根目录 `README.md` 技术栈整理：Vue3、React、TypeScript、Next.js、React Native + Expo、Flutter、Web3、AI/LLM、Node/NestJS、工程化与 WebSocket。（Vue / React 分章、不对照混排，便于分块记忆。）
 
 ## 目录
 
-- [一、Vue 与 React：对照与选型](#一vue-与-react对照与选型)
-- [二、Vue3](#二vue3)
-- [三、React](#三react)
-- [四、TypeScript](#四typescript)
-- [五、Next.js](#五nextjs)
-- [六、React Native + Expo](#六react-native--expo)
-- [七、Flutter / Dart](#七flutter--dart)
-- [八、Web3 / 区块链](#八web3--区块链)
-- [九、AI / LLM 应用](#九ai--llm-应用)
-- [十、Node.js / NestJS](#十nodejs--nestjs)
-- [十一、工程化 / Monorepo / 性能](#十一工程化--monorepo--性能)
-- [十二、WebSocket / 实时通信](#十二websocket--实时通信)
+- [一、Vue3](#一vue3)
+- [二、React](#二react)
+- [三、TypeScript](#三typescript)
+- [四、Next.js](#四nextjs)
+- [五、React Native + Expo](#五react-native--expo)
+- [六、Flutter / Dart](#六flutter--dart)
+- [七、Web3 / 区块链](#七web3--区块链)
+- [八、AI / LLM 应用](#八ai--llm-应用)
+- [九、Node.js / NestJS](#九nodejs--nestjs)
+- [十、工程化 / Monorepo / 性能](#十工程化--monorepo--性能)
+- [十一、WebSocket / 实时通信](#十一websocket--实时通信)
 
 ---
 
-## 一、Vue 与 React：对照与选型
-
-> 与下文的「Vue3 深度」「React 深度」并列：本章侧重**并排对比**与**技术选型话术**，面试中常被问「两个都用过，你怎么选」。
-
-### 1. 总体编程模型有什么本质不同？
-
-**答案：** Vue 以**单文件组件 + 模板**为主流，HTML 结构更接近设计稿，指令（`v-if` / `v-for`）在模板层表达 UI 分支与列表；React 以 **JSX 即 JavaScript 表达式**描述 UI，分支与列表都是 `{}` 里的逻辑。选型：偏设计还原与模板可读性 → Vue；偏逻辑与类型全在 TS/JS 一体 → React。
-
-### 2. 响应式哲学：Vue 的「依赖追踪」vs React 的「显式 setState」？
-
-**答案：** Vue3 用 Proxy **自动追踪**渲染函数里读到的数据，mutable 源数据 + 细粒度更新；React 默认 **不可变数据 + 全量协调（Fiber）**，通过 `setState`/`useReducer` 触发调度。对比：Vue 少写「依赖数组」心智负担；React 数据流更「显式」，与 time-travel、并发特性结合紧。注意：React 也有 MobX 等类 Vue 模型，但生态主路径仍是 hooks。
-
-### 3. `ref`/`reactive` 和 `useState`/`useRef` 分别解决什么？能否类比？
-
-**答案：** `ref` 是单值响应式容器（`.value`），`reactive` 包装对象；`useState` 是**触发重渲染的状态槽**，`useRef` 是**跨渲染可变槽且不触发渲染**。类比：`ref` 更接近 `useState` 的一个值；`reactive` 无直接等价，常拆成多个 `useState` 或 `useReducer`。面试点：「为什么 React 里修改对象属性不触发更新」→ 引用未变。
-
-### 4. `computed` 和 `useMemo` 的相同点与不同点？
-
-**答案：** 都做**派生值缓存**。Vue `computed` 默认 lazy + 自动依赖收集；React `useMemo(fn, deps)` **依赖需手写**，漏写则 stale。对比：Vue 省 deps；React 更可控但易错。性能：两者都应只在昂贵计算或稳定引用时使用。
-
-### 5. `watch`/`watchEffect` 和 `useEffect` 如何对照理解？
-
-**答案：** `watch` 显式源 + 可选 lazy；`watchEffect` 自动收集依赖，接近「每次渲染后跑副作用」但更偏响应式管道。`useEffect` 是**提交阶段后**的副作用，依赖数组等价于「告诉 React 哪些外部同步」。对比：`useEffect` 必须考虑「组件视图已提交」；Vue 的 `watch` 更贴近「数据变了做什么」，与 `flush` 时机（pre/post/sync）组合使用。
-
-### 6. 组件通信：Vue 的 props/emit/provide 与 React 的 props/context？
-
-**答案：** 父子：二者都是 props 向下、回调向上（emit vs callback props）。跨层级：Vue `provide/inject` 常配合 `readonly`；React `Context` + `useContext`，需注意 **Context value 变化导致大范围重渲染**，常拆 context 或用外部 store（Zustand/Jotai）。面试：对比「Vue 更省样板」vs「React context 性能坑与治理」。
-
-### 7. 列表渲染与 `key`：两边理念一致吗？
-
-**答案：** 一致：**稳定 key 标识身份**，避免错误复用 DOM/组件实例。Vue `v-for :key`；React `key` prop。反面教材都是「用 index 作 key」在重排插入时出问题。可补充：Vue2 曾用 key 区分组件类型，Vue3/React18 的 diff 都对静态提升/并发有优化，但 key 语义不变。
-
-### 8. 逻辑复用：Composables 与 Custom Hooks 有什么异同？
-
-**答案：** 二者都是**无渲染逻辑复用**：Vue `useXxx()` 返回 refs/methods；React `useXxx()` 返回 state/setter。差异：Hooks **调用顺序与规则**（不能条件调用）是硬性约束；Vue composable 更自由但仍建议一致返回结构。对比 mixin：两边都可用组合替代 mixin（Vue3 官方推 composable）。
-
-### 9. 状态管理生态：Pinia vs Redux Toolkit / Zustand？
-
-**答案：** Pinia：模块 store、DevTools、无 mutation 样板也可；RTK：单向数据流 + `createSlice` 标准化；Zustand：最小 API、细粒度订阅。面试话术：**业务复杂度与团队规范**决定；跨框架 Monorepo 可能偏向更中立的 Zustand/Jotai。
-
-### 10. 路由：vue-router 与 React Router / Next 路由？
-
-**答案：** vue-router：动态路由、`navigation guard`、keep-alive 一体化；React Router：声明式嵌套路由；Next App Router：**文件系统路由 + RSC 默认**。选型：后台 SPA 常 vue-router；内容站/全栈 Next；纯 CSR React 用 RR。
-
-### 11. 样式方案对比：scoped CSS / CSS Modules vs CSS-in-JS？
-
-**答案：** Vue 常见 `scoped` + 深度选择器；React 常见 CSS Modules、Tailwind、Styled-components。面试点：**样式隔离、SSR、FOUC、包体积**；Vue SFC 单文件集成度高；CSS-in-JS 运行时成本需权衡。
-
-### 12. 表单：Vue `v-model` 与 React 受控组件？
-
-**答案：** `v-model` 是语法糖（`modelValue` + `update:modelValue`）；React 手写 `value` + `onChange`。对比：Vue 少样板；React 显式适合复杂合成事件与跨平台（RN）。
-
-### 13. SSR / SSG：Nuxt 与 Next 如何一句话对比？
-
-**答案：** 都是元框架：**约定路由、数据获取、混合渲染**。Nuxt 偏 Vue 生态；Next 当前以 RSC、缓存语义为卖点。简历场景：「移动端 RN/Expo + Web Next」vs「中后台 Vue + Nuxt」可各举一条项目经验。
-
-### 14. TypeScript 体验：`<script setup lang="ts">` vs TSX？
-
-**答案：** Vue SFC 模板与脚本分离，类型在 `defineProps` 泛型、`Props` 接口清晰；TSX 全在类型系统里，组件即函数，**库作者更友好**。对比：大型表单页 Vue 模板可读性；设计系统/Headless UI TSX 组合灵活。
-
-### 15. 性能优化「口诀级」对照？
-
-**答案：** Vue：`v-once`、`v-memo`、异步组件、`shallowRef`、虚拟列表；React：`memo`、`useMemo/useCallback`（慎用）、并发特性、`React.lazy`。共同点：**测了再优化**、列表虚拟化、减少无关重渲染、拆包与资源优先级。
-
-### 16. 若团队只能选一个，你的选型依据？
-
-**答案：** 从**团队栈、招聘、现有资产、交付形态**回答即可：例如中后台组件库已是 Element Plus → Vue；新站要 SEO+RSC → Next；跨端与 RN 共享思维 → React；维护成本与「官方推荐路径」一致性。避免宗教战争，强调**业务与协作**。
-
----
-
-## 二、Vue3
+## 一、Vue3
 
 ### 1. Vue3 的响应式系统从 Object.defineProperty 切换到 Proxy 有哪些本质区别？Proxy 能解决哪些 Vue2 无法解决的问题？
 
@@ -2483,7 +2412,8 @@ function useResource() {
 
 `onScopeDispose` 是 `onUnmounted` 的泛化版本——在组件内等价于 `onUnmounted`，在 effectScope 内等价于 `scope.stop()` 时的清理回调。这使得 composable 既能在组件内使用，也能在非组件上下文中正确清理。
 
-## 三、React
+
+## 二、React
 
 ### 1. Fiber 解决的问题、节点结构、时间切片？
 
@@ -2552,7 +2482,7 @@ function useResource() {
 ---
 
 
-## 四、TypeScript
+## 三、TypeScript
 
 ### 1. `type` 与 `interface` 的区别？何时更推荐哪个？声明合并差异？
 
@@ -2638,7 +2568,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 五、Next.js
+## 四、Next.js
 
 ### 1. App Router vs Pages Router？
 
@@ -2702,7 +2632,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 六、React Native + Expo
+## 五、React Native + Expo
 
 ### 1. New Architecture（Fabric + TurboModules + JSI）？
 
@@ -2766,7 +2696,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 七、Flutter / Dart
+## 六、Flutter / Dart
 
 ### 1. 三棵树职责？
 
@@ -2834,7 +2764,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 八、Web3 / 区块链
+## 七、Web3 / 区块链
 
 ### 1. Ethers v5 vs v6 与三大抽象？
 
@@ -2902,7 +2832,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 九、AI / LLM 应用
+## 八、AI / LLM 应用
 
 ### 1. RAG 与 Embedding？
 
@@ -2966,7 +2896,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 十、Node.js / NestJS
+## 九、Node.js / NestJS
 
 ### 1. 事件循环阶段与 `nextTick`？
 
@@ -3030,7 +2960,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 十一、工程化 / Monorepo / 性能
+## 十、工程化 / Monorepo / 性能
 
 ### 1. Monorepo vs Multirepo？
 
@@ -3098,7 +3028,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 十二、WebSocket / 实时通信
+## 十一、WebSocket / 实时通信
 
 ### 1. 握手与对比长轮询/SSE？
 

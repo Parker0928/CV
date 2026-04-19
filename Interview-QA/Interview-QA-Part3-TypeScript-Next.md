@@ -1,4 +1,4 @@
-## 四、TypeScript
+## 三、TypeScript
 
 ### 1. `type` 与 `interface` 的区别？何时更推荐哪个？声明合并差异？
 
@@ -84,7 +84,7 @@ type Record<K extends keyof any, V> = { [P in K]: V }
 
 ---
 
-## 五、Next.js
+## 四、Next.js
 
 ### 1. App Router vs Pages Router？
 
